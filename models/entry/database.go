@@ -59,3 +59,32 @@ func (e *Entry) Get(key string) error {
 		return e.Decode(b.Get([]byte(key)))
 	})
 }
+
+// All returns all the entries
+func All() ([]Entry, error) {
+	var err error
+	var all []Entry
+
+	if !database.Main.Opened {
+		return all, fmt.Errorf("Database must be opened first.")
+	}
+	err = database.Main.DB.View(func(tx *bolt.Tx) error {
+		b := tx.Bucket([]byte(Bucket))
+		if b != nil {
+			err = b.ForEach(func(k, v []byte) error {
+				var e Entry
+				if err = e.Decode(v); err != nil {
+					return err
+				}
+				if e.ID, err = strconv.Atoi(string(k)); err != nil {
+					return err
+				}
+				all = append(all, e)
+				return nil
+			})
+			return err
+		}
+		return nil
+	})
+	return all, err
+}

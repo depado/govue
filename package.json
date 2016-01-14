@@ -1,0 +1,28 @@
+{
+  "name": "govue",
+  "version": "1.0.0",
+  "description": "Testing Go API and Vue.js front",
+  "main": "none",
+  "dependencies": {
+    "bootstrap": "^3.3.6",
+    "vue": "^1.0.14",
+    "vue-resource": "^0.6.1"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "none"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Depado/govue.git"
+  },
+  "keywords": [
+    "none"
+  ],
+  "author": "Depado",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/Depado/govue/issues"
+  },
+  "homepage": "https://github.com/Depado/govue#readme"
+}

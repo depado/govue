@@ -1,0 +1,65 @@
+<!-- index.html -->
+
+<!doctype html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <title>Vue</title>
+    <!-- CSS -->
+    <link rel="stylesheet" href="vendor/bootstrap/dist/css/bootstrap.min.css">
+</head>
+
+<body>
+
+    <!-- navigation bar -->
+    <nav class="navbar navbar-default">
+        <div class="container-fluid">
+            <a class="navbar-brand"><i class="glyphicon glyphicon-cog"></i> Vue.js API Testing</a>
+        </div>
+    </nav>
+
+    <!-- main body of our application -->
+    <div class="container" id="entries">
+
+        <!-- add an event form -->
+        <div class="col-sm-6">
+            <div class="panel panel-default">
+                <div class="panel-heading text-center">
+                    <h4>Submit an Entry</h4>
+                </div>
+                <div class="panel-body center-block">
+                    <div class="form-group">
+                        <input class="form-control" placeholder="Title" v-model="entry.attributes.title">
+                    </div>
+                    <div class="form-group">
+                        <textarea class="form-control" placeholder="Markdown" v-model="entry.attributes.markdown"></textarea>
+                    </div>
+                    <button class="btn btn-primary center-block" v-on:click="postEntry">Submit</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- show the events -->
+        <div class="col-sm-6">
+            <div class="list-group">
+                <a href="#" class="list-group-item" v-for="entry in entries">
+                    <h4 class="list-group-item-heading">
+                        {{ entry.attributes.title }}
+                        <span class="pull-right">
+                            <button class="btn btn-xs btn-danger" v-on:click="deleteEntry($index)">Delete</button>
+                        </span>
+                    </h4>
+                    <p class="list-group-item-text">{{ entry.attributes.markdown }}</p>
+                </a>
+            </div>
+        </div>
+    </div>
+
+    <!-- JS -->
+    <script src="vendor/vue/dist/vue.js"></script>
+    <script src="vendor/vue-resource/dist/vue-resource.js"></script>
+    <script src="static/app.js"></script>
+</body>
+
+</html>

@@ -55,6 +55,12 @@ type Wrapper struct {
 	Errors *hateoas.Errors `json:"errors,omitempty"`
 }
 
+// MultiWrapper is a wrapper that can accept multiple Data
+type MultiWrapper struct {
+	Data   *[]Data         `json:"data,omitempty"`
+	Errors *hateoas.Errors `json:"errors,omitempty"`
+}
+
 // Post is the handler to POST a new Entry
 func Post(c *gin.Context) {
 	var err error
@@ -81,6 +87,24 @@ func Post(c *gin.Context) {
 	}
 }
 
+// List lists the entries
+func List(c *gin.Context) {
+	var json = MultiWrapper{}
+	var datas = []Data{}
+
+	entr, err := All()
+	if err != nil {
+		json.Errors = &hateoas.Errors{hateoas.Error{Status: http.StatusInternalServerError, Title: "could not retrieve entries"}}
+		c.JSON(http.StatusInternalServerError, json)
+		return
+	}
+	for i := range entr {
+		datas = append(datas, Data{Type: Type, Attributes: &entr[i]})
+	}
+	json.Data = &datas
+	c.JSON(http.StatusOK, json)
+}
+
 // Get is the handler to GET an existing entry
 func Get(c *gin.Context) {
 	var err error
@@ -98,7 +122,7 @@ func Get(c *gin.Context) {
 		c.JSON(http.StatusInternalServerError, json)
 	}
 	json.Data = &Data{Type: Type, Attributes: &e}
-	c.JSON(http.StatusFound, json)
+	c.JSON(http.StatusOK, json)
 }
 
 // Patch is used to update a resource.
