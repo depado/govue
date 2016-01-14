@@ -4,11 +4,7 @@ import "encoding/json"
 
 // Encode dumps an Entry to json.
 func (e Entry) Encode() ([]byte, error) {
-	enc, err := json.Marshal(e)
-	if err != nil {
-		return nil, err
-	}
-	return enc, nil
+	return json.Marshal(e)
 }
 
 // Decode loads an Entry from json

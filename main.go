@@ -8,6 +8,8 @@ import (
 	"github.com/gin-gonic/gin"
 )
 
+const currentAPIVersion = "1"
+
 func main() {
 	var err error
 
@@ -21,14 +23,14 @@ func main() {
 	// r.LoadHTMLGlob("templates/*")
 	// r.Static("/static", "./assets")
 
-	entryr := r.Group("/entry")
+	currentAPI := r.Group("/api/v" + currentAPIVersion)
+	entryEndpoint := currentAPI.Group("/entry")
 	{
-		entryr.POST("/", entry.Post)
+		entryEndpoint.POST("/", entry.Post)
 		// entryr.GET("/", entry.List)
-		// entryr.GET("/:id", entry.Get)
-		// entryr.PATCH("/:id", entry.Patch)
-		// entryr.PUT("/:id", entry.Put)
-		// entryr.DELETE("/:id", entry.Delete)
+		entryEndpoint.GET("/:id", entry.Get)
+		entryEndpoint.PATCH("/:id", entry.Patch)
+		entryEndpoint.DELETE("/:id", entry.Delete)
 	}
 
 	r.Run(":8080")

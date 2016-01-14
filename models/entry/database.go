@@ -48,3 +48,14 @@ func (e Entry) Delete() error {
 		return b.Delete([]byte(strconv.Itoa(e.ID)))
 	})
 }
+
+// Get retrieves an Entry from the database.
+func (e *Entry) Get(key string) error {
+	if !database.Main.Opened {
+		return fmt.Errorf("Database must be opened first.")
+	}
+	return database.Main.DB.View(func(tx *bolt.Tx) error {
+		b := tx.Bucket([]byte(Bucket))
+		return e.Decode(b.Get([]byte(key)))
+	})
+}
