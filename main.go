@@ -1,15 +1,16 @@
 package main
 
 import (
+	"fmt"
 	"log"
 	"net/http"
+	"strconv"
 
+	"github.com/Depado/govue/conf"
 	"github.com/Depado/govue/database"
 	"github.com/Depado/govue/models/entry"
 	"github.com/gin-gonic/gin"
 )
-
-const currentAPIVersion = "1"
 
 func index(c *gin.Context) {
 	http.ServeFile(c.Writer, c.Request, "templates/index.html")
@@ -17,6 +18,10 @@ func index(c *gin.Context) {
 
 func main() {
 	var err error
+
+	if err = conf.Load("conf.yml"); err != nil {
+		log.Fatal(err)
+	}
 
 	// Database initialization
 	if err = database.Main.Open(); err != nil {
@@ -30,7 +35,7 @@ func main() {
 
 	r.GET("/", index)
 
-	currentAPI := r.Group("/api/v" + currentAPIVersion)
+	currentAPI := r.Group("/api/v" + strconv.Itoa(conf.C.APIVersion))
 	entryEndpoint := currentAPI.Group("/entry")
 	{
 		entryEndpoint.POST("/", entry.Post)
@@ -40,5 +45,5 @@ func main() {
 		entryEndpoint.DELETE("/:id", entry.Delete)
 	}
 
-	r.Run(":8080")
+	r.Run(fmt.Sprintf(":%s", strconv.Itoa(conf.C.Port)))
 }

@@ -19,10 +19,7 @@
         </div>
     </nav>
 
-    <!-- main body of our application -->
     <div class="container" id="entries">
-
-        <!-- add an event form -->
         <div class="col-sm-6">
             <div class="panel panel-default">
                 <div class="panel-heading text-center">
@@ -40,23 +37,34 @@
             </div>
         </div>
 
-        <!-- show the events -->
         <div class="col-sm-6">
             <div class="list-group">
-                <a href="#" class="list-group-item" v-for="entry in entries">
-                    <h4 class="list-group-item-heading">
-                        {{ entry.attributes.title }}
-                        <span class="pull-right">
-                            <button class="btn btn-xs btn-danger" v-on:click="deleteEntry($index)">Delete</button>
-                        </span>
+                <div class="list-group-item" v-for="entry in entries">
+                    <span class="dropdown pull-right">
+                        <button class="btn btn-xs dropdown-toggle" type="button" id="dropdown{{$index}}" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+                            <i class="glyphicon glyphicon-cog"></i>
+                        </button>
+                        <ul class="dropdown-menu" aria-labelledby="dropdown{{$index}}">
+                            <li><a href="#" v-on:click="deleteEntry($index)"><i class="glyphicon glyphicon-pencil"></i> Edit</a></li>
+                            <!-- <li role="separator" class="divider"></li>
+                            <li><a href="#" v-on:click="deleteEntry($index)"><i class="glyphicon glyphicon-trash"></i> Delete</a></li> -->
+                        </ul>
+                    </span>
+                    <h4 class="list-group-item-heading">{{ entry.attributes.title }}
                     </h4>
+                    <!-- <div class="btn-group pull-right" role="group">
+                        <button class="btn btn-xs btn-primary" v-on:click="deleteEntry($index)"><i class="glyphicon glyphicon-pencil"></i> Edit</button>
+                        <button class="btn btn-xs btn-danger" </button>
+                    </div> -->
                     <p class="list-group-item-text">{{ entry.attributes.markdown }}</p>
-                </a>
+                </div>
             </div>
         </div>
     </div>
 
     <!-- JS -->
+    <script src="vendor/jquery/dist/jquery.min.js"></script>
+    <script src="vendor/bootstrap/dist/js/bootstrap.min.js"></script>
     <script src="vendor/vue/dist/vue.js"></script>
     <script src="vendor/vue-resource/dist/vue-resource.js"></script>
     <script src="static/app.js"></script>
