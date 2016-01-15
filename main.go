@@ -30,6 +30,9 @@ func main() {
 	defer database.Main.Close()
 
 	r := gin.Default()
+	if !conf.C.Debug {
+		gin.SetMode(gin.ReleaseMode)
+	}
 	r.Static("/static", "./assets")
 	r.Static("/vendor", "./node_modules")
 
