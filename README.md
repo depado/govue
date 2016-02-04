@@ -28,3 +28,5 @@ api_version: 1
 **port :** The port on which the server should run   
 **debug :** Tells gin to run in debug mode or not   
 **api_version :** An integer representing the API version. The only API verison for now is `1`    
+
+Continuous Integration testing c:
