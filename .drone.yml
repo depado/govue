@@ -1,5 +1,5 @@
 build:
-  image: armhfbuild/golang:1.5.3-alpine
+  image: armhfbuild/golang:1.5.3
   commands:
     - go get
     - go build
