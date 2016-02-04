@@ -1,3 +1,4 @@
+[![Build Status](https://drone.depado.eu/api/badges/Depado/govue/status.svg)](https://drone.depado.eu/Depado/govue)
 # govue
 An attempt to work with Vue.js and a golang gin rest server
 
@@ -29,4 +30,3 @@ api_version: 1
 **debug :** Tells gin to run in debug mode or not   
 **api_version :** An integer representing the API version. The only API verison for now is `1`    
 
-Continuous Integration testing c:
