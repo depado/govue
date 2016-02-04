@@ -1,5 +1,5 @@
 build:
-  image: golang
+  image: kenntwasde/raspi-golang
   commands:
     - go get
     - go build
