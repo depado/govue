@@ -1,5 +1,5 @@
 build:
-  image: kenntwasde/raspi-golang
+  image: armhfbuild/golang:1.5.3-alpine
   commands:
     - go get
     - go build
