@@ -4,3 +4,13 @@ build:
     - go get
     - go build
     - go test
+
+notify:
+  irc:
+    prefix: build
+    nick: depadrone
+    channel: n0sec
+    server:
+      host: irc.freenode.net
+      port: 6667
+
