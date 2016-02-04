@@ -8,7 +8,11 @@
     "vue": "^1.0.15",
     "vue-resource": "^0.6.1"
   },
-  "devDependencies": {},
+  "devDependencies": {
+    "gritcode-components": "^0.3.3",
+    "vuestrap": "^1.0.0",
+    "vuestrap-icons": "^0.4.14"
+  },
   "scripts": {
     "test": "none"
   },
